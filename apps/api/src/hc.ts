@@ -1,11 +1,9 @@
-import type { hc } from "hono/client";
-import { hc as honoClient } from "hono/client";
-import type app from "./routes";
+  import { hc } from "hono/client";
+  import app from "./routes";  // 値としてインポート
 
-// 型定義（ダミークライアントなしで型を取得）
-type AppType = typeof app;
-export type Client = ReturnType<typeof hc<AppType>>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const client = hc<typeof app>("");
+  export type Client = typeof client;
 
-// 型付きhc関数
-export const hcWithType = (...args: Parameters<typeof hc>): Client =>
-  honoClient<AppType>(...args);
+  export const hcWithType = (...args: Parameters<typeof hc>): Client =>
+    hc<typeof app>(...args);
